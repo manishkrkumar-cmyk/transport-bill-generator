@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tax Invoice Print Preview</title>
+    <link rel="stylesheet" href="/css/invoice.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="btn-actions">
+    <button class="btn-print" onclick="downloadPDF()">Download PDF</button>
+    <button class="btn-print" onclick="window.print()">Print Invoice</button>
+</div>
+
+<div class="invoice-box" id="invoice">
+    <!-- Header -->
+    <div style="background-color: #dce6f1; padding: 10px; border: 1px solid #1a365d;">
+        <strong>Company/Seller Name:</strong> <span id="sName"></span><br>
+        <strong>Address:</strong> <span id="sAddr"></span><br>
+        <strong>Phone No.:</strong> <span id="sPhone"></span> | <strong>Email ID:</strong> <span id="sEmail"></span><br>
+        <strong>GSTIN:</strong> <span id="sGstin"></span> | <strong>State:</strong> <span id="sState"></span>
+    </div>
+
+    <div class="title-banner">Tax Invoice</div>
+
+    <!-- Bill To / Transport -->
+    <table class="grid-table border-box">
+        <tr>
+            <td style="width: 50%; vertical-align: top; padding: 8px; border-right: 1px solid #000;">
+                <strong style="background: #1a365d; color: white; padding: 2px 5px; display: block;">Bill To:</strong>
+                Name: <span id="bName"></span><br>
+                Address: <span id="bAddr"></span><br>
+                Contact No.: <span id="bPhone"></span><br>
+                GSTIN No.: <span id="bGstin"></span><br>
+                State: <span id="bState"></span>
+            </td>
+            <td style="width: 50%; vertical-align: top; padding: 8px;">
+                <strong style="background: #c5d9f1; display: block; padding: 2px 5px;">Transportation Details:</strong>
+                Driver Name: <span id="dName"></span><br>
+                Driver Mobile No.: <span id="dPhone"></span><br>
+                Vehicle Number: <span id="vNo"></span><br>
+                <strong>Invoice No.:</strong> <span id="invNo"></span><br>
+                <strong>Date:</strong> <span id="invDate"></span>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Line Items Table -->
+    <table class="table-invoice" id="itemTable">
+        <thead>
+            <tr>
+                <th>#</th><th>Item name</th><th>HSN</th><th>QTY</th><th>Unit</th><th>Price/Unit</th><th>Disc</th><th>GST</th><th>Amount</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- Footer Summary -->
+    <div class="footer-section">
+        <div style="padding: 10px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <strong>Amount in words:</strong><br>
+                <span id="words"></span>
+            </div>
+            <div style="margin-top: 20px;">
+                <strong>Terms & Conditions:</strong><br>
+                <small>1. Payment due upon receipt.</small><br>
+                <small>2. Goods once dispatched carry carrier risks.</small>
+            </div>
+        </div>
+
+        <div>
+            <table class="totals-table">
+                <tr><td>Sub Total:</td><td id="subTotal">0.00</td></tr>
+                <tr><td>Packaging Fee:</td><td id="pkgFee">0.00</td></tr>
+                <tr><td>Delivery Fee:</td><td id="delFee">0.00</td></tr>
+                <tr><td>Discount:</td><td id="disc">0.00</td></tr>
+                <tr><td>SGST:</td><td id="sgst">0.00</td></tr>
+                <tr><td>CGST:</td><td id="cgst">0.00</td></tr>
+                <tr style="background: #c5d9f1; font-weight: bold;"><td>Total:</td><td id="grandTotal">0.00</td></tr>
+                <tr><td>Received:</td><td id="received">0.00</td></tr>
+                <tr style="font-weight: bold;"><td>Balance:</td><td id="balance">0.00</td></tr>
+            </table>
+            <div style="text-align: center; margin-top: 30px;">Company seal and Sign</div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/pdf-generator.js"></script>
+</body>
+</html>

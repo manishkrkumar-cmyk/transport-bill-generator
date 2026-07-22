@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport Portal - Login</title>
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 60px;
+        }
+
+        /* Full Screen Split Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+
+        /* --- LEFT BRANDING SIDE --- */
+        .left-side {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .brand-logo i {
+            font-size: 38px;
+            color: #6366f1;
+        }
+
+        .brand-logo span {
+            font-size: 42px;
+            font-weight: 800;
+            color: #1e1b4b;
+            letter-spacing: -1px;
+        }
+
+        .tagline-hindi {
+            color: #ec4899;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 45px;
+        }
+
+        .main-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #475569;
+            line-height: 1.15;
+            margin-bottom: 4px;
+        }
+
+        .highlight-blue {
+            font-size: 58px;
+            font-weight: 800;
+            color: #2563eb;
+            display: block;
+            margin-bottom: 24px;
+        }
+
+        .sub-desc {
+            font-size: 16px;
+            color: #4f46e5;
+            font-weight: 500;
+            max-width: 480px;
+            line-height: 1.5;
+        }
+
+        .sub-desc strong {
+            color: #1e1b4b;
+            font-weight: 700;
+        }
+
+        /* --- RIGHT CARD SIDE --- */
+        .right-side {
+            flex: 0.9;
+            max-width: 460px;
+            width: 100%;
+        }
+
+        /* Gradient Border Container */
+        .card-wrapper {
+            background: linear-gradient(135deg, #3b82f6, #ec4899);
+            padding: 2px;
+            border-radius: 28px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+        }
+
+        .auth-card {
+            background: #ffffff;
+            border-radius: 26px;
+            padding: 44px 36px 32px 36px;
+            display: flex;
+            flex-direction: column;
+            min-height: 520px;
+        }
+
+        .card-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #1e293b;
+            text-align: center;
+        }
+
+        .card-subtitle {
+            font-size: 13px;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        /* Bottom Line Input Style */
+        .input-box {
+            margin-bottom: 24px;
+        }
+
+        .input-box input {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid #2563eb;
+            padding: 10px 4px;
+            font-size: 15px;
+            color: #1e293b;
+            outline: none;
+            background: transparent;
+        }
+
+        .input-box input::placeholder {
+            color: #94a3b8;
+        }
+
+        /* Primary Button */
+        .btn-submit {
+            width: 100%;
+            background: #2563eb;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: #1d4ed8;
+        }
+
+        /* Secondary OTP Button */
+        .btn-otp {
+            width: 100%;
+            background: transparent;
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #64748b;
+            cursor: pointer;
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        /* Google Sign In */
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 24px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .google-btn:hover {
+            background: #f1f5f9;
+        }
+
+        /* Bottom Nav Links */
+        .auth-links {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 24px;
+        }
+
+        .auth-links a {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Terms Text */
+        .terms {
+            font-size: 11px;
+            color: #94a3b8;
+            text-align: center;
+            margin-top: auto;
+            line-height: 1.4;
+        }
+
+        .terms a {
+            color: #64748b;
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+            }
+            .left-side {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- LEFT SIDE: Branding -->
+        <div class="left-side">
+            <div class="brand-logo">
+                <i class="fa-solid fa-truck-moving"></i>
+                <span>Transport</span>
+            </div>
+            <div class="tagline-hindi">Correct Bill, Quickly</div>
+
+            <h1 class="main-title" id="left-title">Secure</h1>
+            <span class="highlight-blue">GST Invoicing</span>
+
+            <p class="sub-desc" id="left-subdesc">
+                Create and share Invoices with over <br>
+                <strong>1000 customisation options</strong> in just a few clicks
+            </p>
+        </div>
+
+        <!-- RIGHT SIDE: Auth Card with Gradient Border -->
+        <div class="right-side">
+            <div class="card-wrapper">
+                <div class="auth-card">
+                    <h2 class="card-title" id="form-title">Login</h2>
+                    <p class="card-subtitle" id="form-subtitle">to unlock powerful Invoicing</p>
+
+                    <form id="authForm">
+                        <div class="input-box">
+                            <input type="text" id="username" placeholder="Username / Mobile" required>
+                        </div>
+
+                        <div class="input-box hidden" id="box-email">
+                            <input type="email" id="email" placeholder="Email Address">
+                        </div>
+
+                        <div class="input-box" id="box-password">
+                            <input type="password" id="password" placeholder="Password" required>
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="btn-submit">Login</button>
+                    </form>
+
+                    <button type="button" class="btn-otp" id="btn-otp">or Login Using OTP</button>
+
+                    <!-- UPDATED: Triggers Spring Security's Google OAuth Endpoint -->
+                    <a href="/oauth2/authorization/google" class="google-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                        Continue With Google
+                    </a>
+
+                    <div class="auth-links">
+                        <a href="javascript:void(0)" onclick="switchTo('register')" id="link-account">Create Account</a>
+                        <a href="javascript:void(0)" onclick="switchTo('reset')" id="link-forgot">Forgot Password</a>
+                    </div>
+
+                    <p class="terms">
+                        * By continuing you agree to our <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentMode = 'login';
+
+        function switchTo(mode) {
+            currentMode = mode;
+            const leftTitle = document.getElementById('left-title');
+            const formTitle = document.getElementById('form-title');
+            const formSubtitle = document.getElementById('form-subtitle');
+            const boxEmail = document.getElementById('box-email');
+            const boxPassword = document.getElementById('box-password');
+            const btnSubmit = document.getElementById('btn-submit');
+            const btnOtp = document.getElementById('btn-otp');
+            const linkAccount = document.getElementById('link-account');
+            const linkForgot = document.getElementById('link-forgot');
+            const emailInput = document.getElementById('email');
+            const passInput = document.getElementById('password');
+
+            if (mode === 'register') {
+                leftTitle.innerText = "Customisable";
+                formTitle.innerText = "Get started today";
+                formSubtitle.innerText = "Create your first Invoice in seconds";
+                boxEmail.classList.remove('hidden');
+                boxPassword.classList.remove('hidden');
+                btnOtp.classList.add('hidden');
+                emailInput.setAttribute('required', 'true');
+                passInput.setAttribute('required', 'true');
+                btnSubmit.innerText = "Register Account";
+                linkAccount.innerText = "Login";
+                linkAccount.setAttribute('onclick', "switchTo('login')");
+                linkForgot.style.display = 'inline';
+            } else if (mode === 'login') {
+                leftTitle.innerText = "Secure";
+                formTitle.innerText = "Login";
+                formSubtitle.innerText = "to unlock powerful Invoicing";
+                boxEmail.classList.add('hidden');
+                boxPassword.classList.remove('hidden');
+                btnOtp.classList.remove('hidden');
+                emailInput.removeAttribute('required');
+                passInput.setAttribute('required', 'true');
+                btnSubmit.innerText = "Login";
+                linkAccount.innerText = "Create Account";
+                linkAccount.setAttribute('onclick', "switchTo('register')");
+                linkForgot.style.display = 'inline';
+            } else if (mode === 'reset') {
+                leftTitle.innerText = "Account";
+                formTitle.innerText = "Reset Password";
+                formSubtitle.innerText = "Enter username to recover password";
+                boxEmail.classList.add('hidden');
+                boxPassword.classList.add('hidden');
+                btnOtp.classList.add('hidden');
+                emailInput.removeAttribute('required');
+                passInput.removeAttribute('required');
+                btnSubmit.innerText = "Send Reset Link";
+                linkAccount.innerText = "Back to Login";
+                linkAccount.setAttribute('onclick', "switchTo('login')");
+                linkForgot.style.display = 'none';
+            }
+        }
+
+        // Handle Form Submission
+        document.getElementById('authForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (currentMode === 'login' || currentMode === 'register') {
+                window.location.href = '/dashboard';
+            } else {
+                alert('Password reset link sent to your registered contact!');
+                switchTo('login');
+            }
+        });
+    </script>
+</body>
+</html>

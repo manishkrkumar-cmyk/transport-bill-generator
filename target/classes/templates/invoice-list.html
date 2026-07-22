@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Invoices - Transport Bill Generator</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <style>
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .search-box { padding: 8px 12px; width: 300px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
+        .btn-secondary { background-color: #2563eb; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 14px; }
+        .btn-view { background-color: #0f172a; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; text-decoration: none; display: inline-block; }
+        .status-badge { padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+        .badge-paid { background-color: #dcfce7; color: #15803d; }
+        .badge-pending { background-color: #fef3c7; color: #b45309; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Transport Bill Generator</h1>
+        <div>
+            <a href="/dashboard" style="color: white; margin-right: 15px; text-decoration: none;">+ Create New Invoice</a>
+            <span>Welcome, Admin</span>
+        </div>
+    </div>
+
+    <div class="container" style="max-width: 1100px; margin-top: 25px;">
+        <div class="card">
+            <div class="page-header">
+                <h2>Generated Invoices History</h2>
+                <input type="text" id="searchInput" class="search-box" placeholder="Search by Invoice No, Customer, or Date..." onkeyup="filterTable()">
+            </div>
+
+            <table class="table-input" id="invoicesTable">
+                <thead>
+                    <tr>
+                        <th>Invoice No</th>
+                        <th>Date</th>
+                        <th>Customer Name</th>
+                        <th>Vehicle No</th>
+                        <th>Grand Total (₹)</th>
+                        <th>Balance (₹)</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="inv : ${invoices}">
+                        <td th:text="${inv.invoiceNo}" class="bold">INV-2026-001</td>
+                        <td th:text="${inv.invoiceDate}">2026-07-22</td>
+                        <td th:text="${inv.billToName}">Manish Kumar</td>
+                        <td th:text="${inv.vehicleNumber}">KA-01-EA-1234</td>
+                        <td th:text="${#numbers.formatDecimal(inv.grandTotal, 1, 'COMMA', 2, 'POINT')}">15,000.00</td>
+                        <td th:text="${#numbers.formatDecimal(inv.balanceAmount, 1, 'COMMA', 2, 'POINT')}">0.00</td>
+                        <td>
+                            <span th:if="${inv.balanceAmount <= 0}" class="status-badge badge-paid">PAID</span>
+                            <span th:if="${inv.balanceAmount > 0}" class="status-badge badge-pending">PENDING</span>
+                        </td>
+                        <td>
+                            <button class="btn-view" th:onclick="viewInvoice([[${inv.invoiceNo}]])">View / Print</button>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(invoices)}">
+                        <td colspan="8" style="text-align: center; color: #64748b; padding: 20px;">No invoices generated yet.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Live table filtering
+        function filterTable() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const rows = document.querySelectorAll('#invoicesTable tbody tr');
+
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        }
+
+        // View and reload invoice into localStorage then navigate to print view
+        async function viewInvoice(invoiceNo) {
+            try {
+                const res = await fetch('/api/invoices/' + invoiceNo);
+                if (res.ok) {
+                    const data = await res.json();
+                    localStorage.setItem('generatedInvoice', JSON.stringify(data));
+                    window.location.href = '/invoice-print';
+                } else {
+                    alert('Failed to load invoice details.');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Error fetching invoice.');
+            }
+        }
+    </script>
+</body>
+</html>

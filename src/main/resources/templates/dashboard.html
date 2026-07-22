@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Generator Dashboard</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+    <!-- Top Navigation Bar with explicit visible styles -->
+    <div class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 24px;">
+        <h1 style="margin: 0;">Transport Bill Generator</h1>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <a href="/invoices" style="display: inline-flex; align-items: center; gap: 6px; background-color: #2563eb; color: #ffffff !important; text-decoration: none; padding: 8px 14px; border-radius: 6px; font-weight: 600; font-size: 13px; white-space: nowrap; box-shadow: 0 1px 2px rgba(0,0,0,0.1);">
+                <span>📋</span>
+                <span>View Saved Bills</span>
+            </a>
+            <span style="color: #475569; font-weight: 500; font-size: 14px;">Welcome, Admin</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <form id="invoiceForm">
+            <!-- Company / Seller Section -->
+            <div class="card">
+                <div class="card-title">Company / Seller Details</div>
+                <div class="grid-3">
+                    <div class="form-field"><label>Seller Name</label><input type="text" id="sellerName" value="FastTrack Logistics"></div>
+                    <div class="form-field"><label>Phone</label><input type="text" id="sellerPhone" value="+91 9876543210"></div>
+                    <div class="form-field"><label>Email</label><input type="email" id="sellerEmail" value="info@fasttrack.com"></div>
+                    <div class="form-field"><label>GSTIN</label><input type="text" id="sellerGstin" value="27AAAAA0000A1Z5"></div>
+                    <div class="form-field"><label>State</label><input type="text" id="sellerState" value="Maharashtra"></div>
+                    <div class="form-field"><label>Address</label><input type="text" id="sellerAddress" value="102 Highway Hub, Sector 18"></div>
+                </div>
+            </div>
+
+            <!-- Bill To & Transport Details -->
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">Bill To (Customer)</div>
+                    <div class="form-field">
+                        <label>Customer Name</label>
+                        <!-- Integrated Searchable Datalist Dropdown -->
+                        <input type="text" id="billToName" list="customerList" placeholder="Type or select customer..." oninput="autoFillCustomerDetails(this.value)" required>
+                        <datalist id="customerList">
+                            <option value="Manish Kumar">
+                            <option value="ABC Logistics">
+                            <option value="Sharma Traders">
+                        </datalist>
+                    </div>
+                    <div class="form-field"><label>Address</label><input type="text" id="billToAddress"></div>
+                    <div class="form-field"><label>Contact No</label><input type="text" id="billToContact"></div>
+                    <div class="form-field"><label>GSTIN No</label><input type="text" id="billToGstin"></div>
+                    <div class="form-field"><label>State</label><input type="text" id="billToState"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Transportation Details</div>
+                    <div class="form-field"><label>Invoice No</label><input type="text" id="invoiceNo" value="INV-2026-001" required></div>
+                    <div class="form-field"><label>Invoice Date</label><input type="date" id="invoiceDate" required></div>
+                    <div class="form-field"><label>Driver Name</label><input type="text" id="driverName"></div>
+                    <div class="form-field"><label>Driver Mobile</label><input type="text" id="driverMobile"></div>
+                    <div class="form-field"><label>Vehicle Number</label><input type="text" id="vehicleNumber"></div>
+                </div>
+            </div>
+
+            <!-- Line Items -->
+            <div class="card">
+                <div class="card-title">Line Items</div>
+                <table class="table-input" id="itemsTable">
+                    <thead>
+                        <tr>
+                            <th>#</th><th>Item Name</th><th>HSN</th><th>QTY</th><th>Unit</th><th>Price/Unit</th><th>Disc</th><th>GST %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><input type="text" class="item-name" value="Goods Transport Service" required></td>
+                            <td><input type="text" class="item-hsn" value="996511"></td>
+                            <td><input type="number" class="item-qty" value="1"></td>
+                            <td><input type="text" class="item-unit" value="Trip"></td>
+                            <td><input type="number" class="item-price" value="15000"></td>
+                            <td><input type="number" class="item-disc" value="0"></td>
+                            <td><input type="number" class="item-gst" value="18"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="btn-add" onclick="addRow()">+ Add Item Row</button>
+            </div>
+
+            <!-- Charges & Settlement -->
+            <div class="card">
+                <div class="card-title">Additional Charges & Settlement</div>
+                <div class="grid-3">
+                    <div class="form-field"><label>Packaging Fee</label><input type="number" id="packagingFee" value="0"></div>
+                    <div class="form-field"><label>Delivery Fee</label><input type="number" id="deliveryFee" value="0"></div>
+                    <div class="form-field"><label>Overall Discount</label><input type="number" id="discount" value="0"></div>
+                    <div class="form-field"><label>Advance / Received</label><input type="number" id="receivedAmount" value="0"></div>
+                </div>
+            </div>
+
+            <!-- Standard form submit button -->
+            <button type="submit" class="btn-submit">Calculate & Generate Tax Invoice</button>
+        </form>
+    </div>
+
+    <!-- Main JS logic handling auto-fill, dynamic rows, and form payload submission -->
+    <script src="/js/calculator.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f8fafc;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 60px;
+}
+
+/* Full Screen Split Container */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+/* --- LEFT BRANDING SIDE --- */
+.left-side {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.brand-logo i {
+    font-size: 38px;
+    color: #6366f1;
+}
+
+.brand-logo span {
+    font-size: 42px;
+    font-weight: 800;
+    color: #1e1b4b;
+    letter-spacing: -1px;
+}
+
+.tagline-hindi {
+    color: #ec4899;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 45px;
+}
+
+.main-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: #475569;
+    line-height: 1.15;
+    margin-bottom: 4px;
+}
+
+.highlight-blue {
+    font-size: 58px;
+    font-weight: 800;
+    color: #2563eb;
+    display: block;
+    margin-bottom: 24px;
+}
+
+.sub-desc {
+    font-size: 16px;
+    color: #4f46e5;
+    font-weight: 500;
+    max-width: 480px;
+    line-height: 1.5;
+}
+
+.sub-desc strong {
+    color: #1e1b4b;
+    font-weight: 700;
+}
+
+/* --- RIGHT CARD SIDE --- */
+.right-side {
+    flex: 0.9;
+    max-width: 460px;
+    width: 100%;
+}
+
+/* Gradient Border Container */
+.card-wrapper {
+    background: linear-gradient(135deg, #3b82f6, #ec4899);
+    padding: 2px;
+    border-radius: 28px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+}
+
+.auth-card {
+    background: #ffffff;
+    border-radius: 26px;
+    padding: 44px 36px 32px 36px;
+    display: flex;
+    flex-direction: column;
+    min-height: 520px;
+}
+
+.card-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1e293b;
+    text-align: center;
+}
+
+.card-subtitle {
+    font-size: 13px;
+    color: #64748b;
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+/* Bottom Line Input Style */
+.input-box {
+    margin-bottom: 24px;
+}
+
+.input-box input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #2563eb;
+    padding: 10px 4px;
+    font-size: 15px;
+    color: #1e293b;
+    outline: none;
+    background: transparent;
+}
+
+.input-box input::placeholder {
+    color: #94a3b8;
+}
+
+/* Primary Button */
+.btn-submit {
+    width: 100%;
+    background: #f1f5f9;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #94a3b8;
+    cursor: pointer;
+    margin-bottom: 12px;
+    transition: all 0.2s;
+}
+
+.btn-submit.active-btn {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.btn-submit:hover {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+/* Secondary OTP Button */
+.btn-otp {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #e2e8f0;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #64748b;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Google Sign In */
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 24px;
+}
+
+/* Bottom Nav Links */
+.auth-links {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 24px;
+}
+
+.auth-links a {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+/* Terms Text */
+.terms {
+    font-size: 11px;
+    color: #94a3b8;
+    text-align: center;
+    margin-top: auto;
+    line-height: 1.4;
+}
+
+.terms a {
+    color: #64748b;
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+    .left-side {
+        margin-bottom: 30px;
+    }
+}
